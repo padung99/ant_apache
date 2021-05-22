@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="1" hostname="AnhDungP" name="TestMessageUtil" skipped="0" tests="2" time="0.177" timestamp="2021-05-19T09:43:40">
+  <properties>
+    <property name="ant.library.dir" value="E:\lab3_Dung\apache-ant-1.10.10\lib" />
+    <property name="ant.file.type" value="file" />
+    <property name="java.specification.version" value="16" />
+    <property name="ant.project.name" value="lab3" />
+    <property name="sun.cpu.isalist" value="amd64" />
+    <property name="sun.jnu.encoding" value="Cp1252" />
+    <property name="java.class.path" value="E:\lab3_Dung\apache-ant-1.10.10\lib\ant-launcher.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-antlr.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-bcel.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-bsf.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-log4j.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-oro.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-regexp.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-resolver.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-apache-xalan2.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-commons-logging.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-commons-net.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-contrib-1.0b3.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-imageio.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-jai.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-javamail.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-jdepend.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-jmf.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-jsch.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-junit.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-junit4.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-junitlauncher.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-launcher.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-netrexx.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-swing.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-testutil.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant-xz.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\ant.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\hamcrest-all-1.3.jar;E:\lab3_Dung\apache-ant-1.10.10\lib\junit-4.13.2.jar" />
+    <property name="junit.out.dir.html" value="E:\lab3_Dung\report\junit\html" />
+    <property name="java.vm.vendor" value="Oracle Corporation" />
+    <property name="jar.dir" value="E:\lab3_Dung\build\jar" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="user.variant" value="" />
+    <property name="local.dir" value="E:\lab3_Dung\localdir" />
+    <property name="ant.file.lab3" value="E:\lab3_Dung\build.xml" />
+    <property name="java.vendor.url" value="https://java.oracle.com/" />
+    <property name="java.vm.specification.version" value="16" />
+    <property name="os.name" value="Windows 10" />
+    <property name="git_repo_url" value="https://VidelD:Royalkill1@github.com/VitelD/metods.git" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="user.country" value="US" />
+    <property name="junit.out.dir.xml" value="E:\lab3_Dung\report\junit\xml" />
+    <property name="sun.boot.library.path" value="C:\Users\dungphan16499\Desktop\java\jdk-16.0.1\bin" />
+    <property name="sun.java.command" value="org.apache.tools.ant.launch.Launcher test" />
+    <property name="jdk.debug" value="release" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="test.dir" value="E:\lab3_Dung\test" />
+    <property name="user.home" value="C:\Users\dungphan16499" />
+    <property name="user.language" value="en" />
+    <property name="sun.stderr.encoding" value="cp437" />
+    <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="java.version.date" value="2021-04-20" />
+    <property name="java.home" value="C:\Users\dungphan16499\Desktop\java\jdk-16.0.1" />
+    <property name="svn_repo" value="E:\lab3_Dung\svn_repo" />
+    <property name="basedir" value="E:\lab3_Dung" />
+    <property name="file.separator" value="\" />
+    <property name="java.vm.compressedOopsMode" value="Zero based" />
+    <property name="sun.stdout.encoding" value="cp437" />
+    <property name="line.separator" value="&#xd;&#xa;" />
+    <property name="filename" value="TestMessageUtil " />
+    <property name="ant.java.version" value="16" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="doc.dir" value="E:\lab3_Dung\doc" />
+    <property name="user.script" value="" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="java.runtime.version" value="16.0.1+9-24" />
+    <property name="user.name" value="dungphan16499" />
+    <property name="ant.file" value="E:\lab3_Dung\build.xml" />
+    <property name="path.separator" value=";" />
+    <property name="class.dir" value="E:\lab3_Dung\build\classes" />
+    <property name="os.version" value="10.0" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="file.encoding" value="Cp1252" />
+    <property name="ant.project.invoked-targets" value="test" />
+    <property name="git_repo" value="E:\lab3_Dung\git_repo" />
+    <property name="svn_repo_url" value="https://WinDev2102Eval/svn/svn_repo" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="report.dir" value="E:\lab3_Dung\report" />
+    <property name="ant.core.lib" value="E:\lab3_Dung\apache-ant-1.10.10\lib\ant.jar" />
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/" />
+    <property name="java.io.tmpdir" value="C:\Users\DUNGPH~1\AppData\Local\Temp\" />
+    <property name="java.version" value="16.0.1" />
+    <property name="user.dir" value="E:\lab3_Dung" />
+    <property name="os.arch" value="amd64" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="ant.home" value="E:\lab3_Dung\apache-ant-1.10.10" />
+    <property name="for_zip.dir" value="E:\lab3_Dung\zip" />
+    <property name="ant.file.type.lab3" value="file" />
+    <property name="sun.os.patch.level" value="" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.10.10 compiled on April 12 2021" />
+    <property name="sounds.dir" value="E:\lab3_Dung\sounds" />
+    <property name="java.library.path" value="C:\Users\dungphan16499\Desktop\java\jdk-16.0.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;F:\app\dungphan16499\virtual\product\12.2.0\dbhome_1\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\MATLAB\R2018a\runtime\win64;C:\Program Files\MATLAB\R2018a\bin;C:\Program Files (x86)\Wolfram Research\WolframScript\;C:\Program Files\Git\cmd;E:\lab3_Dung\apache-ant-1.10.10\bin;C:\Users\dungphan16499\Desktop\java\jdk-16.0.1\bin;%ANT_HOME\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin;C:\Users\dungphan16499\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\intelFPGA_lite\20.1\modelsim_ase\win32aloem;C:\Users\dungphan16499\AppData\Local\Programs\Microsoft VS Code\bin;." />
+    <property name="java.vm.info" value="mixed mode, sharing" />
+    <property name="java.vendor" value="Oracle Corporation" />
+    <property name="java.vm.version" value="16.0.1+9-24" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="java.class.version" value="60.0" />
+    <property name="src.dir" value="E:\lab3_Dung\src" />
+    <property name="ant.project.default-target" value="main" />
+  </properties>
+  <testcase classname="TestMessageUtil" name="testSalutationMessage" time="0.016" />
+  <testcase classname="TestMessageUtil" name="testPrintMessage" time="0.069">
+    <failure message="expected:&lt;Dun[--]g&gt; but was:&lt;Dun[]g&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;Dun[--]g&gt; but was:&lt;Dun[]g&gt;
+	at TestMessageUtil.testPrintMessage(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+</failure>
+  </testcase>
+  <system-out><![CDATA[Inside testSalutationMessage()
+Revision3!Dung
+Inside testPrintMessage()
+Dung
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

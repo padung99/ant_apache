@@ -1,0 +1,319 @@
+<project name="lab3" default="main" basedir=".">
+	<!-- Download "*.bin.zip$" here https://sourceforge.net/projects/ant-contrib/files/ant-contrib/1.0b3/ -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
+	
+	<property name= "src.dir" location= "src"/>
+	<property name= "class.dir" location= "build/classes"/> 
+	<property name= "test.dir" location= "test"/>
+	<property name= "doc.dir" location= "doc"/>
+	<property name= "jar.dir" location= "build/jar"/>
+	<property name= "for_zip.dir" location= "zip"/>
+	<property name= "local.dir" location= "localdir"/>
+	<property name= "git_repo" location= "git_repo"/>
+	<property name= "svn_repo" location= "svn_repo"/>
+	<property name= "sounds.dir" location= "sounds"/>
+	<property name= "filename" value= "TestMessageUtil "/>
+	<property name= "report.dir" location="report"/>
+	<property name= "git_repo_url" value = "https://VidelD:Royalkill1@github.com/VitelD/metods.git"/>
+	<property name= "svn_repo_url" value = "https://WinDev2102Eval/svn/svn_repo"/>
+    <property name= "junit.out.dir.xml"  location="${report.dir}/junit/xml"/>
+    <property name= "junit.out.dir.html" location="${report.dir}/junit/html"/>
+	
+
+	
+	<path id = "classpath.base"/>
+	<path id = "classpath.test">
+		<pathelement location = "lib/junit-4.13.2.jar" />
+		<pathelement location = "${test.dir}" />
+		<pathelement location = "${src.dir}" />
+		<path refid = "classpath.base" />
+	</path>
+	
+
+	<target name="main">   <!--Запустить targer main, установить порядок, в котором выполняются остальные цели -->
+		<!--<antcall target="compile"/> -->
+		<!--<antcall target="build"/> -->
+		<!--<antcall target="run"/>  -->
+		<antcall target= "native2ascii"/> 
+		<antcall target="test"/>
+		 <antcall target="git-delete"/> 
+		<!-- <antcall target="svn_delete"/> -->
+		<!-- <antcall target="svn_clone"/> -->
+		<!--<antcall target="history"/> -->
+		<!-- <antcall target="git-clone"/> -->
+		<antcall target= "doc"/>
+		<antcall target="fun"/>
+		<!--<antcall target="team"/> -->
+		<antcall target="report"/>
+		<!--<antcall target="report"/> -->
+		<!--<antcall target="clean"/> -->
+		 <!-- <antcall target="team"/> -->
+	</target>
+	
+	<target name = "compile" depends= "clean">
+		 <echo>Compiling... </echo>
+		 <mkdir dir = "${test.dir}"/>
+		 <mkdir dir = "${class.dir}"/>
+		 <javac srcdir="${src.dir}" destdir="${test.dir}" />
+				<!--verbose = "${full-compile}">
+				<classpath refid = "classpath.test"/>
+		  </javac>-->	  
+		  <javac srcdir="${src.dir}" destdir="${class.dir}"/>	  
+		 <echo>Compile successfully. </echo>		 
+	</target>
+	
+	<target name="build" depends = "compile">
+		<echo>Building... </echo>
+		<mkdir dir= "${jar.dir}"/>
+		<jar basedir= "${test.dir}" destfile="${jar.dir}/${filename}.jar">
+			<manifest>
+				<attribute name= "Main-Class" value= "${filename}"/> 
+			</manifest>
+		</jar>
+		<echo>Build successfully. </echo>
+	</target>
+	
+	<target name="team">
+		<delete dir="build"/>
+		<delete dir="${for_zip.dir}"/>
+		<mkdir dir= "${for_zip.dir}"/>
+		<antcall target="git-clone"/>
+		
+		<for param="i" begin="0" end="2">
+            <sequential>
+			
+                <delete>
+					<fileset dir="${src.dir}">
+						<include name="*"/>
+					</fileset>
+				</delete>
+				
+				<copy todir="${src.dir}">
+					<fileset dir="${git_repo}" includes="*.java"/>
+				</copy>
+				
+				<antcall target="build"/>
+				
+				<copy todir="${for_zip.dir}">
+					<fileset dir="${jar.dir}"/>
+					<globmapper from="*.jar" to="*@{i}.jar"/>
+				 </copy>
+				
+				<exec executable="git">
+					<arg value="reset" />
+					<arg value="--hard" />
+					<arg value="HEAD^" />
+				</exec>
+				
+			</sequential>
+        </for>
+		
+		<!-- zip -->
+		<zip destfile="${for_zip.dir}/3_revs.zip" basedir="${for_zip.dir}"/>
+	</target>
+	
+	<target name="svn_clone">
+		<exec executable="svn" dir=".">
+			<arg value="checkout" />
+			<arg value="${svn_repo_url}" />
+		</exec>
+	</target>
+	
+	<target name="svn_delete">
+		<delete dir="${svn_repo}"/>
+	</target>
+	
+	<target name="history">
+		<antcall target="svn_delete"/>
+		<antcall target="svn_clone"/>
+		<antcall target="clean"/>
+		
+		<trycatch>
+			<try>
+				<delete>
+					<fileset dir="${src.dir}">
+						<include name="*"/>
+					</fileset>
+				</delete>						
+				<copy todir="${src.dir}">
+					<fileset dir="${svn_repo}" includes="*.java"/>
+				</copy>
+				<antcall target="compile"/>
+			</try>
+			
+			<catch>
+				<echo>Trying to download the previous revision.</echo>
+				<trycatch>
+					<try>
+					<!-- загрузить предыдущую версию -->
+						<exec executable="svn">
+							<arg value="info" />
+							<arg value="${svn_repo}/" />
+						</exec>
+						<exec executable="svn">
+							<arg value="merge" />
+							<arg value="-c" />
+							<arg value="4" />
+							<arg value="${svn_repo_url}" />
+						</exec>
+						
+						<exec executable="svn">
+							<arg value="merge" />
+							<arg value="-c" />
+							<arg value="3" />
+							<arg value="${svn_repo}/" />
+						</exec>
+						<exec executable="svn">
+							<arg value="merge" />
+							<arg value="-c" />
+							<arg value="2" />
+							<arg value="${svn_repo}/" />
+						</exec>
+						
+					</try>
+					<catch>
+						<echo>The first revision was found.</echo>
+					</catch>
+				</trycatch>
+			</catch>
+			
+		</trycatch>
+	</target>
+	
+	<target name="clean"> 
+        <echo>Cleaning...</echo>
+        <delete dir="${test.dir}"/>
+		<delete dir="build"/> 
+		<!-- <delete dir= "${for_zip.dir}"/> -->
+		<!--<delete dir="${git_repo}">-->
+        <echo>Cleaning done.</echo>
+    </target> 
+	
+	<target name = "test" depends = "build"> <!--Тестовая цель -->
+        <delete dir="${report.dir}"/>
+		<mkdir dir="${report.dir}"/>
+		<mkdir dir="${junit.out.dir.xml}"/>
+		<mkdir dir="${junit.out.dir.html}"/>
+        <junit printsummary="yes" haltonfailure="yes" showoutput="yes">
+            <!--<classpath refid="classpath.test"/> -->
+		<classpath>
+			<pathelement location="${class.dir}"/>
+				<fileset dir="build/">
+					<include name="lib/*.jar" />
+				</fileset>
+		</classpath>
+        <formatter type="xml"/>
+		<test name = "TestMessageUtil" todir="${junit.out.dir.xml}" />
+        </junit>
+		<echo>Testing done. </echo>
+	</target>
+	
+    <target name="doc">
+		<delete dir="${doc.dir}"/>
+		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${doc.dir}">
+      <!-- Определите, какие файлы / каталог должны быть включены, мы включаем все -->
+			<fileset dir="${src.dir}">
+				<include name="**" />
+           </fileset>
+		</javadoc>
+	
+	<delete file="keystore.jks"/>
+	
+	<genkey dname="CN=Lab3, OU=University, O=ITMO, L=Saint-Petersburg, C=Russia"
+			alias="testonly"
+			storetype="jks"
+			keystore="keystore.jks"
+			keyalg="RSA"
+			storepass="mystorepass" 
+			keypass="mykeypass"/>
+					
+	
+	<signjar 
+			alias="testonly"
+			keystore="keystore.jks"	
+			storepass="mystorepass"
+			keypass="mykeypass"
+			sigalg="MD5withRSA"
+			digestalg="SHA1">
+			
+			<path>
+				<fileset dir="${jar.dir}" includes="**/*.jar"/>
+			</path>
+	</signjar>
+	
+	<signjar 
+			alias="testonly"
+			keystore="keystore.jks"	
+			storepass="mystorepass"
+			keypass="mykeypass"
+			sigalg="MD5withRSA"
+			digestalg="MD5">
+			
+        <path>
+			<fileset dir="${jar.dir}" includes="**/*.jar"/>
+		</path>
+	</signjar>
+  </target>
+
+	<target name= "native2ascii">
+		<delete dir="${local.dir}"/>
+		<echo>Creating source files... </echo>
+		<mkdir dir="${local.dir}"/>
+		<echo>Converting... </echo>
+		<native2ascii encoding="windows-1251" src="${src.dir}" dest="${local.dir}"
+			includes="**/*.java"/>
+	</target>
+	
+	<target name="fun" if="fun" unless="fun.done">
+		<sound>
+			<success source="sounds/bell.wav" loops="100"/>
+			<fail source="sounds/ohno.wav" loops="50"/>
+		</sound>
+		<property name="fun.done" value="true"/>
+	</target> 
+	
+	<target name = "git-clone">
+		<exec executable="git">
+			<arg value="clone" />
+			<arg value="${git_repo_url}" />
+			<arg value="${git_repo}" />
+		</exec>
+	</target>
+	
+	<target name="git-delete"> 
+        <echo>Deleting rep...</echo>
+		<delete dir="${git_repo}"/>
+        <echo>Deleting rep done.</echo>
+    </target>
+	
+	<target name = "report">
+		<echo>Printing report... </echo>
+		<junitreport todir="${junit.out.dir.html}">
+            <fileset dir="${junit.out.dir.xml}">
+                <include name="*.xml" />
+            </fileset>
+            <report format="frames" todir="${junit.out.dir.html}" />
+        </junitreport>
+		<echo>Printing done. </echo>	
+		
+		<!--<delete dir="${git_repo}"/>-->
+		<!--<mkdir dir="${git_repo}"/>-->
+		<!--<copydir src="${git_rep}" dest="."/> -->
+		<exec command="git clone ${git_repo_url} ${git_repo}" dir = "."></exec>
+		<copy todir="${git_repo}">
+			<fileset dir="${junit.out.dir.xml}" includes="**/*.xml"/>
+		</copy>
+		<echo>Creating git_repo... </echo>
+		<!--git-svn clone file:///e/svn_repo_on_E_drive  -->
+		<echo>Configurating users... </echo>
+		<exec command="git config --local user.name user1" dir="${git_repo}"></exec>
+		<exec command="git config --local user.email user1@mail.ru" dir="${git_repo}"></exec>
+		<echo>Adding files... </echo>
+		<exec command="git add ." dir="${git_repo}"></exec>
+		<echo>Commiting... </echo>
+		<exec command="git commit -m addingXML" dir="${git_repo}"></exec>
+		<echo>Commiting done. </echo>		
+   </target> 
+  
+			
+</project>
